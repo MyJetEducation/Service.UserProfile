@@ -4,13 +4,13 @@ using Service.UserProfile.Grpc;
 
 namespace Service.UserProfile.Client
 {
-    [UsedImplicitly]
-    public class UserProfileClientFactory: MyGrpcClientFactory
-    {
-        public UserProfileClientFactory(string grpcServiceUrl) : base(grpcServiceUrl)
-        {
-        }
+	[UsedImplicitly]
+	public class UserProfileClientFactory : MyGrpcClientFactory
+	{
+		public UserProfileClientFactory(string grpcServiceUrl) : base(grpcServiceUrl)
+		{
+		}
 
-        public IHelloService GetHelloService() => CreateGrpcService<IHelloService>();
-    }
+		public IHelloService GetHelloService() => CreateGrpcService<IHelloService>();
+	}
 }

@@ -5,13 +5,13 @@ using Service.UserProfile.Grpc;
 
 namespace Service.UserProfile.Client
 {
-    public static class AutofacHelper
-    {
-        public static void RegisterUserProfileClient(this ContainerBuilder builder, string grpcServiceUrl)
-        {
-            var factory = new UserProfileClientFactory(grpcServiceUrl);
+	public static class AutofacHelper
+	{
+		public static void RegisterUserProfileClient(this ContainerBuilder builder, string grpcServiceUrl)
+		{
+			var factory = new UserProfileClientFactory(grpcServiceUrl);
 
-            builder.RegisterInstance(factory.GetHelloService()).As<IHelloService>().SingleInstance();
-        }
-    }
+			builder.RegisterInstance(factory.GetHelloService()).As<IHelloService>().SingleInstance();
+		}
+	}
 }

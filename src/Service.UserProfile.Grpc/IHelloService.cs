@@ -4,10 +4,10 @@ using Service.UserProfile.Grpc.Models;
 
 namespace Service.UserProfile.Grpc
 {
-    [ServiceContract]
-    public interface IHelloService
-    {
-        [OperationContract]
-        Task<HelloMessage> SayHelloAsync(HelloRequest request);
-    }
+	[ServiceContract]
+	public interface IHelloService
+	{
+		[OperationContract]
+		Task<HelloMessage> SayHelloAsync(HelloRequest request);
+	}
 }

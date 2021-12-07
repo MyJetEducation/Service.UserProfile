@@ -13,5 +13,8 @@ namespace Service.UserProfile.Settings
 
         [YamlProperty("UserProfile.ElkLogs")]
         public LogElkSettings ElkLogs { get; set; }
+
+        [YamlProperty("UserProfile.PostgresConnectionString")]
+        public string PostgresConnectionString { get; set; }
     }
 }

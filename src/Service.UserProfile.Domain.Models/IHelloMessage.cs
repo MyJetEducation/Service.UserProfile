@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Service.UserProfile.Domain.Models
+﻿namespace Service.UserProfile.Domain.Models
 {
-    public interface IHelloMessage
-    {
-        string Message { get; set; }
-    }
+	public interface IHelloMessage
+	{
+		string Message { get; set; }
+	}
 }
