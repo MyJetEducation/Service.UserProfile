@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using SimpleTrading.Common.Helpers;
 
-namespace Service.UserInfo.Crud.Services
+namespace Service.UserProfile.Services
 {
 	public class EncoderDecoder : IEncoderDecoder
 	{

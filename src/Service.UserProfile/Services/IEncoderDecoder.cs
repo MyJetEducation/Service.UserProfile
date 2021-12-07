@@ -1,4 +1,4 @@
-﻿namespace Service.UserInfo.Crud.Services
+﻿namespace Service.UserProfile.Services
 {
 	public interface IEncoderDecoder
 	{
