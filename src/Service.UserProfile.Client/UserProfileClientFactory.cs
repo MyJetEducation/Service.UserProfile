@@ -11,6 +11,6 @@ namespace Service.UserProfile.Client
 		{
 		}
 
-		public IHelloService GetHelloService() => CreateGrpcService<IHelloService>();
+		public IUserProfileService GetUserProfileService() => CreateGrpcService<IUserProfileService>();
 	}
 }

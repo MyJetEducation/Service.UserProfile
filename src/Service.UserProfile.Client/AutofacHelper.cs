@@ -11,7 +11,7 @@ namespace Service.UserProfile.Client
 		{
 			var factory = new UserProfileClientFactory(grpcServiceUrl);
 
-			builder.RegisterInstance(factory.GetHelloService()).As<IHelloService>().SingleInstance();
+			builder.RegisterInstance(factory.GetUserProfileService()).As<IUserProfileService>().SingleInstance();
 		}
 	}
 }

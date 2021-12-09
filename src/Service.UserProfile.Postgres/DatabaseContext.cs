@@ -1,20 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyJetWallet.Sdk.Postgres;
 using MyJetWallet.Sdk.Service;
-using Service.UserProfile.Postgres.Models;
+using Service.UserProfile.Domain.Models;
 
 namespace Service.UserProfile.Postgres
 {
 	public class DatabaseContext : MyDbContext
 	{
 		public const string Schema = "education";
-		private const string UserProfileTableName = "userprofile";
+		private const string UserProfileQuestionTableName = "userprofile_question";
 
 		public DatabaseContext(DbContextOptions options) : base(options)
 		{
 		}
 
-		public DbSet<UserProfileEntity> UserInfos { get; set; }
+		public DbSet<UserProfileQuestionEntity> UserProfiles { get; set; }
 
 		public static DatabaseContext Create(DbContextOptionsBuilder<DatabaseContext> options)
 		{
@@ -34,12 +34,14 @@ namespace Service.UserProfile.Postgres
 
 		private static void SetUserInfoEntityEntry(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<UserProfileEntity>().ToTable(UserProfileTableName);
-			modelBuilder.Entity<UserProfileEntity>().HasKey(e => e.Id);
-
-			//modelBuilder.Entity<UserProfileEntity>().Property(e => e.UserNameHash).IsRequired();
-
-			modelBuilder.Entity<UserProfileEntity>().HasIndex(e => e.Id).IsUnique();
+			modelBuilder.Entity<UserProfileQuestionEntity>().ToTable(UserProfileQuestionTableName);
+			modelBuilder.Entity<UserProfileQuestionEntity>().Property(e => e.Title).IsRequired();
+			modelBuilder.Entity<UserProfileQuestionEntity>().Property(e => e.AnswerType).IsRequired();
+			modelBuilder.Entity<UserProfileQuestionEntity>().Property(e => e.AnswerName);
+			modelBuilder.Entity<UserProfileQuestionEntity>().Property(e => e.AdditionalAnswer);
+			modelBuilder.Entity<UserProfileQuestionEntity>().Property(e => e.AnswerData);
+			modelBuilder.Entity<UserProfileQuestionEntity>().HasIndex(e => e.Id).IsUnique();
+			modelBuilder.Entity<UserProfileQuestionEntity>().HasKey(e => e.Id);
 		}
 	}
 }

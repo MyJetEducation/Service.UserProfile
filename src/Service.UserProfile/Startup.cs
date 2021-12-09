@@ -9,8 +9,10 @@ using MyJetWallet.Sdk.GrpcSchema;
 using MyJetWallet.Sdk.Postgres;
 using MyJetWallet.Sdk.Service;
 using Prometheus;
+using Service.UserProfile.Grpc;
 using Service.UserProfile.Modules;
 using Service.UserProfile.Postgres;
+using Service.UserProfile.Services;
 using SimpleTrading.ServiceStatusReporterConnector;
 
 namespace Service.UserProfile
@@ -37,6 +39,7 @@ namespace Service.UserProfile
 
 			app.UseEndpoints(endpoints =>
 			{
+				endpoints.MapGrpcSchema<UserProfileService, IUserProfileService>();
 				endpoints.MapGrpcSchemaRegistry();
 				endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909"); });
 			});

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Service.UserProfile.Services;
 
 namespace Service.UserProfile.Modules
 {
@@ -6,6 +7,7 @@ namespace Service.UserProfile.Modules
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
+			builder.RegisterType<UserProfileQuestionRepository>().AsImplementedInterfaces().SingleInstance();
 		}
 	}
 }

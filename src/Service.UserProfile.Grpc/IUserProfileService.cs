@@ -5,9 +5,9 @@ using Service.UserProfile.Grpc.Models;
 namespace Service.UserProfile.Grpc
 {
 	[ServiceContract]
-	public interface IHelloService
+	public interface IUserProfileService
 	{
 		[OperationContract]
-		Task<HelloMessage> SayHelloAsync(HelloRequest request);
+		ValueTask<UserProfileQuestionGrpcResponse> GetQuestions();
 	}
 }
