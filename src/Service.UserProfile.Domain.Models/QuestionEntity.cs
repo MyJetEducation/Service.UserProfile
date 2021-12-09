@@ -1,6 +1,6 @@
 ﻿namespace Service.UserProfile.Domain.Models
 {
-	public class UserProfileQuestionEntity
+	public class QuestionEntity
 	{
 		public int? Id { get; set; }
 

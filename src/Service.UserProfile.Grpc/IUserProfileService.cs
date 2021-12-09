@@ -8,6 +8,12 @@ namespace Service.UserProfile.Grpc
 	public interface IUserProfileService
 	{
 		[OperationContract]
-		ValueTask<UserProfileQuestionGrpcResponse> GetQuestions();
+		ValueTask<QuestionGrpcResponse> GetQuestions();
+
+		[OperationContract]
+		ValueTask<AccountGrpcResponse> GetAccount(GetAccountGrpcRequest request);
+
+		[OperationContract]
+		ValueTask<CommonGrpcResponse> SaveAccount(SaveAccountGrpcRequest request);
 	}
 }

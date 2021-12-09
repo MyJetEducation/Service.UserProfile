@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace Service.UserProfile.Grpc.Models
 {
 	[DataContract]
-	public class UserProfileQuestionDataGrpcModel
+	public class QuestionDataGrpcModel
 	{
 		[DataMember(Order = 1)]
 		[JsonPropertyName("id")]
@@ -16,6 +16,6 @@ namespace Service.UserProfile.Grpc.Models
 
 		[DataMember(Order = 3)]
 		[JsonPropertyName("answer")]
-		public UserProfileQuestionAnswerGrpcModel QuestionAnswer { get; set; }
+		public QuestionAnswerGrpcModel QuestionAnswer { get; set; }
 	}
 }

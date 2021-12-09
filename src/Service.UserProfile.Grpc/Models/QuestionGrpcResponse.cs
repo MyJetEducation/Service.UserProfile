@@ -3,9 +3,9 @@
 namespace Service.UserProfile.Grpc.Models
 {
 	[DataContract]
-	public class CommonResponse
+	public class QuestionGrpcResponse
 	{
 		[DataMember(Order = 1)]
-		public bool IsSuccess { get; set; }
+		public QuestionDataGrpcModel[] Data { get; set; }
 	}
 }

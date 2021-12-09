@@ -3,9 +3,9 @@
 namespace Service.UserProfile.Grpc.Models
 {
 	[DataContract]
-	public class UserProfileQuestionGrpcResponse
+	public class AccountGrpcResponse
 	{
 		[DataMember(Order = 1)]
-		public UserProfileQuestionDataGrpcModel[] Data { get; set; }
+		public AccountDataGrpcModel Data { get; set; }
 	}
 }

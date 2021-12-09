@@ -1,5 +1,6 @@
 ﻿using Autofac;
-using Service.UserProfile.Services;
+using Service.UserProfile.Domain;
+using Service.UserProfile.Domain.Models;
 
 namespace Service.UserProfile.Modules
 {
@@ -7,7 +8,12 @@ namespace Service.UserProfile.Modules
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterType<UserProfileQuestionRepository>().AsImplementedInterfaces().SingleInstance();
+			builder.RegisterType<QuestionRepository>().AsImplementedInterfaces().SingleInstance();
+			builder.RegisterType<AccountRepository>().AsImplementedInterfaces().SingleInstance();
+
+			builder.Register(context => new EncoderDecoder(Program.EncodingKey))
+				.As<IEncoderDecoder>()
+				.SingleInstance();
 		}
 	}
 }

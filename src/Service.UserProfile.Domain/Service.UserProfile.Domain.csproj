@@ -4,4 +4,14 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="SimpleTrading.Common" Version="1.0.32" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Service.UserProfile.Domain.Models\Service.UserProfile.Domain.Models.csproj" />
+    <ProjectReference Include="..\Service.UserProfile.Postgres\Service.UserProfile.Postgres.csproj" />
+  </ItemGroup>
+
 </Project>

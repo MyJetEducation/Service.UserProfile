@@ -1,4 +1,4 @@
-﻿namespace Service.UserProfile.Services
+﻿namespace Service.UserProfile.Domain.Models
 {
 	public interface IEncoderDecoder
 	{

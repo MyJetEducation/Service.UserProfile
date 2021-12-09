@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using Service.UserProfile.Domain.Models;
 using SimpleTrading.Common.Helpers;
 
-namespace Service.UserProfile.Services
+namespace Service.UserProfile.Domain
 {
 	public class EncoderDecoder : IEncoderDecoder
 	{
