@@ -8,14 +8,12 @@ namespace Service.UserProfile.Postgres
 	public class DatabaseContext : MyDbContext
 	{
 		public const string Schema = "education";
-		private const string UserProfileQuestionTableName = "userprofile_question";
 		private const string UserProfileAccountTableName = "userprofile_account";
 
 		public DatabaseContext(DbContextOptions options) : base(options)
 		{
 		}
 
-		public DbSet<QuestionEntity> Questions { get; set; }
 		public DbSet<AccountEntity> Accounts { get; set; }
 
 		public static DatabaseContext Create(DbContextOptionsBuilder<DatabaseContext> options)
@@ -29,24 +27,9 @@ namespace Service.UserProfile.Postgres
 		{
 			modelBuilder.HasDefaultSchema(Schema);
 
-			SetQuestionsEntityEntry(modelBuilder);
 			SetAccountEntityEntry(modelBuilder);
 
 			base.OnModelCreating(modelBuilder);
-		}
-
-		private static void SetQuestionsEntityEntry(ModelBuilder modelBuilder)
-		{
-			modelBuilder.Entity<QuestionEntity>().ToTable(UserProfileQuestionTableName);
-			modelBuilder.Entity<QuestionEntity>().Property(e => e.Id).IsRequired();
-			modelBuilder.Entity<QuestionEntity>().Property(e => e.Title).IsRequired();
-			modelBuilder.Entity<QuestionEntity>().Property(e => e.AnswerType).IsRequired();
-			modelBuilder.Entity<QuestionEntity>().Property(e => e.AnswerName);
-			modelBuilder.Entity<QuestionEntity>().Property(e => e.AdditionalAnswer);
-			modelBuilder.Entity<QuestionEntity>().Property(e => e.AnswerData);
-			modelBuilder.Entity<QuestionEntity>().HasIndex(e => e.Id).IsUnique();
-			modelBuilder.Entity<QuestionEntity>().HasIndex(e => e.Enabled);
-			modelBuilder.Entity<QuestionEntity>().HasKey(e => e.Id);
 		}
 
 		private static void SetAccountEntityEntry(ModelBuilder modelBuilder)

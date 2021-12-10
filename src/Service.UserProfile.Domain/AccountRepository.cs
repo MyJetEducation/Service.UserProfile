@@ -8,12 +8,16 @@ using Service.UserProfile.Postgres;
 
 namespace Service.UserProfile.Domain
 {
-	public class AccountRepository : RepositoryBase, IAccountRepository
+	public class AccountRepository : IAccountRepository
 	{
 		private readonly ILogger<AccountRepository> _logger;
+		private readonly DbContextOptionsBuilder<DatabaseContext> _dbContextOptionsBuilder;
 
-		public AccountRepository(DbContextOptionsBuilder<DatabaseContext> dbContextOptionsBuilder, ILogger<AccountRepository> logger) :
-			base(dbContextOptionsBuilder) => _logger = logger;
+		public AccountRepository(ILogger<AccountRepository> logger, DbContextOptionsBuilder<DatabaseContext> dbContextOptionsBuilder)
+		{
+			_logger = logger;
+			_dbContextOptionsBuilder = dbContextOptionsBuilder;
+		}
 
 		public async ValueTask<AccountEntity> GetAccount(Guid? userId)
 		{
@@ -58,5 +62,7 @@ namespace Service.UserProfile.Domain
 
 			return false;
 		}
+
+		private DatabaseContext GetContext() => DatabaseContext.Create(_dbContextOptionsBuilder);
 	}
 }

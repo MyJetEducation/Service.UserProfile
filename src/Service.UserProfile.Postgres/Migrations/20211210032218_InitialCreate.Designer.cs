@@ -12,7 +12,7 @@ using Service.UserProfile.Postgres;
 namespace Service.UserProfile.Postgres.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20211209084006_InitialCreate")]
+    [Migration("20211210032218_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,47 +51,6 @@ namespace Service.UserProfile.Postgres.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("userprofile_account", "education");
-                });
-
-            modelBuilder.Entity("Service.UserProfile.Domain.Models.QuestionEntity", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
-
-                    b.Property<bool?>("AdditionalAnswer")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("AnswerData")
-                        .HasColumnType("text");
-
-                    b.Property<string>("AnswerName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("AnswerType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool?>("Enabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<int?>("Order")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Enabled");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.ToTable("userprofile_question", "education");
                 });
 #pragma warning restore 612, 618
         }

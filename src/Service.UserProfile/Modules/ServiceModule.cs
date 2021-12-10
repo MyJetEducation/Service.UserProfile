@@ -8,7 +8,6 @@ namespace Service.UserProfile.Modules
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterType<QuestionRepository>().AsImplementedInterfaces().SingleInstance();
 			builder.RegisterType<AccountRepository>().AsImplementedInterfaces().SingleInstance();
 
 			builder.Register(context => new EncoderDecoder(Program.EncodingKey))
