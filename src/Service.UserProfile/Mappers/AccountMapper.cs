@@ -1,4 +1,5 @@
-﻿using Service.UserProfile.Domain.Models;
+﻿using Service.Core.Domain.Models;
+using Service.UserProfile.Domain.Models;
 using Service.UserProfile.Grpc.Models;
 
 namespace Service.UserProfile.Mappers

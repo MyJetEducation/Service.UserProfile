@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Service.Core.Domain.Models;
+using Service.Core.Grpc.Models;
 using Service.UserProfile.Domain.Models;
 using Service.UserProfile.Grpc;
 using Service.UserProfile.Grpc.Models;

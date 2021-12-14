@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyJetWallet.Sdk.Service;
 using MySettingsReader;
+using Service.Core.Domain.Extensions;
 using Service.UserProfile.Settings;
 
 namespace Service.UserProfile
@@ -31,13 +32,13 @@ namespace Service.UserProfile
 
 		public static void Main(string[] args)
 		{
-			Console.Title = "MyJetWallet Service.UserProfile";
+			Console.Title = "MyJetEducation Service.UserProfile";
 
 			Settings = SettingsReader.GetSettings<SettingsModel>(SettingsFileName);
 
 			GetEnvVariables();
 
-			using ILoggerFactory loggerFactory = LogConfigurator.ConfigureElk("MyJetWallet", Settings.SeqServiceUrl, Settings.ElkLogs);
+			using ILoggerFactory loggerFactory = LogConfigurator.ConfigureElk("MyJetEducation", Settings.SeqServiceUrl, Settings.ElkLogs);
 			ILogger<Program> logger = loggerFactory.CreateLogger<Program>();
 			LogFactory = loggerFactory;
 
@@ -84,7 +85,7 @@ namespace Service.UserProfile
 		{
 			string key = Environment.GetEnvironmentVariable(EncodingKeyStr);
 
-			if (string.IsNullOrEmpty(key))
+			if (key.IsNullOrEmpty())
 				throw new Exception($"Env Variable {EncodingKeyStr} is not found");
 
 			EncodingKey = key;

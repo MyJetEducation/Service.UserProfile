@@ -1,6 +1,7 @@
 ﻿using Autofac;
+using Service.Core.Domain;
+using Service.Core.Domain.Models;
 using Service.UserProfile.Domain;
-using Service.UserProfile.Domain.Models;
 
 namespace Service.UserProfile.Modules
 {
