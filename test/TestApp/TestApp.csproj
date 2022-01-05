@@ -6,17 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.Net.Client" Version="2.41.0" />
-    <PackageReference Include="MyJetEducation.Service.Core.Client" Version="1.0.8" />
-    <PackageReference Include="protobuf-net.Grpc" Version="1.0.152" />
-    <PackageReference Include="SimpleTrading.Common" Version="1.0.32" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\src\Service.UserProfile.Client\Service.UserProfile.Client.csproj" />
     <ProjectReference Include="..\..\src\Service.UserProfile.Grpc\Service.UserProfile.Grpc.csproj" />
-    <ProjectReference Include="..\..\src\Service.UserProfile.Postgres\Service.UserProfile.Postgres.csproj" />
-    <ProjectReference Include="..\..\src\Service.UserProfile\Service.UserProfile.csproj" />
   </ItemGroup>
 
 </Project>
