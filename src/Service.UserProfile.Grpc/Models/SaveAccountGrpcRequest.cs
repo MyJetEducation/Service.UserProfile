@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Service.Core.Domain.Extensions;
 
 namespace Service.UserProfile.Grpc.Models
 {
@@ -23,5 +24,12 @@ namespace Service.UserProfile.Grpc.Models
 
 		[DataMember(Order = 6)]
 		public string Country { get; set; }
+
+		public bool IsFilled() => UserId.HasValue 
+			&& !FirstName.IsNullOrEmpty()
+			&& !LastName.IsNullOrEmpty()
+			&& !Gender.IsNullOrEmpty()
+			&& !Phone.IsNullOrEmpty()
+			&& !Country.IsNullOrEmpty();
 	}
 }

@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
+using DotNetCoreDecorators;
 using Service.Core.Domain.Models;
 using Service.Core.Grpc.Models;
 using Service.UserProfile.Domain.Models;
 using Service.UserProfile.Grpc;
 using Service.UserProfile.Grpc.Models;
+using Service.UserProfile.Grpc.ServiceBusModel;
 using Service.UserProfile.Mappers;
 
 namespace Service.UserProfile.Services
@@ -12,16 +14,21 @@ namespace Service.UserProfile.Services
 	{
 		private readonly IAccountRepository _accountRepository;
 		private readonly IEncoderDecoder _encoderDecoder;
+		private readonly IPublisher<UserAccountFilledServiceBusModel> _publisher;
 
-		public UserProfileService(IAccountRepository accountRepository, IEncoderDecoder encoderDecoder)
+		public UserProfileService(IAccountRepository accountRepository, IEncoderDecoder encoderDecoder, IPublisher<UserAccountFilledServiceBusModel> publisher)
 		{
 			_accountRepository = accountRepository;
 			_encoderDecoder = encoderDecoder;
+			_publisher = publisher;
 		}
 
 		public async ValueTask<CommonGrpcResponse> SaveAccount(SaveAccountGrpcRequest request)
 		{
 			bool saved = await _accountRepository.SaveAccount(request.ToEntity(_encoderDecoder));
+
+			if (saved && request.IsFilled())
+				await _publisher.PublishAsync(new UserAccountFilledServiceBusModel {UserId = request.UserId});
 
 			return CommonGrpcResponse.Result(saved);
 		}

@@ -16,5 +16,8 @@ namespace Service.UserProfile.Settings
 
         [YamlProperty("UserProfile.PostgresConnectionString")]
         public string PostgresConnectionString { get; set; }
+
+        [YamlProperty("UserProfile.ServiceBusWriter")]
+        public string ServiceBusWriter { get; set; }
     }
 }

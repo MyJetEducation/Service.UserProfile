@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="SimpleTrading.Common" Version="1.0.32" />
+    <PackageReference Include="MyJetWallet.Sdk.ServiceBus" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
