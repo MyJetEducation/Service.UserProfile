@@ -4,9 +4,4 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Service.UserProfile.Domain.Models\Service.UserProfile.Domain.Models.csproj" />
-    <ProjectReference Include="..\Service.UserProfile.Postgres\Service.UserProfile.Postgres.csproj" />
-  </ItemGroup>
-
 </Project>

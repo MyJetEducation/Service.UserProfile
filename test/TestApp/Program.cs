@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Threading.Tasks;
 using ProtoBuf.Grpc.Client;
-using Service.Core.Grpc.Models;
+using Service.Core.Client.Models;
 using Service.UserProfile.Client;
 using Service.UserProfile.Grpc;
 using Service.UserProfile.Grpc.Models;

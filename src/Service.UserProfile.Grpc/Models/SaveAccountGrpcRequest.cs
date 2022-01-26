@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Service.Core.Domain.Extensions;
+using Service.Core.Client.Extensions;
 
 namespace Service.UserProfile.Grpc.Models
 {

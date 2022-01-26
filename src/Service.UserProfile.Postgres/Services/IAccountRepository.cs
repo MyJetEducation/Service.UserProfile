@@ -1,7 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Service.UserProfile.Postgres.Models;
 
-namespace Service.UserProfile.Domain.Models
+namespace Service.UserProfile.Postgres.Services
 {
 	public interface IAccountRepository
 	{

@@ -1,10 +1,9 @@
 ﻿using Autofac;
 using DotNetCoreDecorators;
 using MyServiceBus.TcpClient;
-using Service.Core.Domain;
-using Service.Core.Domain.Models;
-using Service.UserProfile.Domain;
+using Service.Core.Client.Services;
 using Service.UserProfile.Grpc.ServiceBusModel;
+using Service.UserProfile.Postgres.Services;
 using Service.UserProfile.Services;
 
 namespace Service.UserProfile.Modules

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Service.UserProfile.Domain.Models;
-using Service.UserProfile.Postgres;
+using Service.UserProfile.Postgres.Models;
 
-namespace Service.UserProfile.Domain
+namespace Service.UserProfile.Postgres.Services
 {
 	public class AccountRepository : IAccountRepository
 	{

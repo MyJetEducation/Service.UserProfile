@@ -1,6 +1,6 @@
-﻿using Service.Core.Domain.Models;
-using Service.UserProfile.Domain.Models;
+﻿using Service.Core.Client.Services;
 using Service.UserProfile.Grpc.Models;
+using Service.UserProfile.Postgres.Models;
 
 namespace Service.UserProfile.Mappers
 {

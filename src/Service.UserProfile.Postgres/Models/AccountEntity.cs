@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Service.UserProfile.Domain.Models
+﻿namespace Service.UserProfile.Postgres.Models
 {
 	public class AccountEntity
 	{

@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
 using DotNetCoreDecorators;
-using Service.Core.Domain.Models;
-using Service.Core.Grpc.Models;
-using Service.UserProfile.Domain.Models;
+using Service.Core.Client.Models;
+using Service.Core.Client.Services;
 using Service.UserProfile.Grpc;
 using Service.UserProfile.Grpc.Models;
 using Service.UserProfile.Grpc.ServiceBusModel;
 using Service.UserProfile.Mappers;
+using Service.UserProfile.Postgres.Models;
+using Service.UserProfile.Postgres.Services;
 
 namespace Service.UserProfile.Services
 {
