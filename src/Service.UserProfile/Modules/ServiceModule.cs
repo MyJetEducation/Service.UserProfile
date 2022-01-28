@@ -1,10 +1,9 @@
 ﻿using Autofac;
-using DotNetCoreDecorators;
+using MyJetWallet.Sdk.ServiceBus;
 using MyServiceBus.TcpClient;
 using Service.Core.Client.Services;
-using Service.UserProfile.Grpc.ServiceBusModel;
+using Service.ServiceBus.Models;
 using Service.UserProfile.Postgres.Services;
-using Service.UserProfile.Services;
 
 namespace Service.UserProfile.Modules
 {
@@ -16,8 +15,12 @@ namespace Service.UserProfile.Modules
 			builder.Register(context => new EncoderDecoder(Program.EncodingKey)).As<IEncoderDecoder>().SingleInstance();
 
 			var tcpServiceBus = new MyServiceBusTcpClient(() => Program.Settings.ServiceBusWriter, "MyJetEducation Service.UserProfile");
-			IPublisher<UserAccountFilledServiceBusModel> clientRegisterPublisher = new MyServiceBusPublisher(tcpServiceBus);
-			builder.Register(context => clientRegisterPublisher);
+
+			builder
+				.Register(context => new MyServiceBusPublisher<UserAccountFilledServiceBusModel>(tcpServiceBus, UserAccountFilledServiceBusModel.TopicName, false))
+				.As<IServiceBusPublisher<UserAccountFilledServiceBusModel>>()
+				.SingleInstance();
+
 			tcpServiceBus.Start();
 		}
 	}

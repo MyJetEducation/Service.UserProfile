@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
 using DotNetCoreDecorators;
+using MyJetWallet.Sdk.ServiceBus;
 using Service.Core.Client.Models;
 using Service.Core.Client.Services;
+using Service.ServiceBus.Models;
 using Service.UserProfile.Grpc;
 using Service.UserProfile.Grpc.Models;
-using Service.UserProfile.Grpc.ServiceBusModel;
 using Service.UserProfile.Mappers;
 using Service.UserProfile.Postgres.Models;
 using Service.UserProfile.Postgres.Services;
@@ -15,9 +16,9 @@ namespace Service.UserProfile.Services
 	{
 		private readonly IAccountRepository _accountRepository;
 		private readonly IEncoderDecoder _encoderDecoder;
-		private readonly IPublisher<UserAccountFilledServiceBusModel> _publisher;
+		private readonly IServiceBusPublisher<UserAccountFilledServiceBusModel> _publisher;
 
-		public UserProfileService(IAccountRepository accountRepository, IEncoderDecoder encoderDecoder, IPublisher<UserAccountFilledServiceBusModel> publisher)
+		public UserProfileService(IAccountRepository accountRepository, IEncoderDecoder encoderDecoder, IServiceBusPublisher<UserAccountFilledServiceBusModel> publisher)
 		{
 			_accountRepository = accountRepository;
 			_encoderDecoder = encoderDecoder;
