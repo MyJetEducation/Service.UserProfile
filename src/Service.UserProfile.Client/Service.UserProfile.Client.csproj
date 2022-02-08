@@ -6,8 +6,9 @@
 
   <ItemGroup>
     <ProjectReference PrivateAssets="All" Include="..\Service.UserProfile.Grpc\Service.UserProfile.Grpc.csproj" />
-    <PackageReference Include="Autofac" Version="6.3.0" />
-    <PackageReference Include="MyJetWallet.Sdk.Grpc" Version="2.0.0" />
+    <PackageReference PrivateAssets="All" Include="Autofac" Version="6.3.0" />
+    <PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
+    <PackageReference PrivateAssets="All" Include="MyJetWallet.Sdk.Grpc" Version="2.0.0" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -9,11 +9,11 @@
   <ItemGroup>
     <PackageReference Include="SimpleTrading.Common" Version="1.0.32" />
     <PackageReference Include="MyJetWallet.Sdk.ServiceBus" Version="2.1.0" />
-    <PackageReference Include="MyJetEducation.Service.ServiceBus" Version="1.0.8" />
+    <PackageReference Include="MyJetEducation.Service.ServiceBus" Version="1.0.12" />
+    <PackageReference Include="MyJetEducation.Service.Core.Client" Version="1.0.28" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Service.UserProfile.Domain\Service.UserProfile.Domain.csproj" />
     <ProjectReference Include="..\Service.UserProfile.Grpc\Service.UserProfile.Grpc.csproj" />
     <ProjectReference Include="..\Service.UserProfile.Postgres\Service.UserProfile.Postgres.csproj" />
   </ItemGroup>
