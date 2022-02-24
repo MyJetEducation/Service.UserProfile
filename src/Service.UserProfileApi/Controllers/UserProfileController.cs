@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -50,7 +51,7 @@ namespace Service.UserProfileApi.Controllers
 
 		[HttpPost("progress")]
 		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<ProgressResponse>), Description = "Ok")]
-		public async ValueTask<IActionResult> HomeAsync()
+		public async ValueTask<IActionResult> GetProgressAsync()
 		{
 			Guid? userId = await GetUserIdAsync();
 			if (userId == null)
@@ -71,6 +72,25 @@ namespace Service.UserProfileApi.Controllers
 				Skill = statsProgress.Skill.ToModel(),
 				Knowledge = statsProgress.Knowledge.ToModel(),
 				Achievements = achievements?.Items
+			});
+		}
+
+		[HttpPost("achievements")]
+		[SwaggerResponse(HttpStatusCode.OK, typeof(DataResponse<AchievementsResponse>), Description = "Ok")]
+		public async ValueTask<IActionResult> GetAchievementsAsync()
+		{
+			Guid? userId = await GetUserIdAsync();
+			if (userId == null)
+				return StatusResponse.Error(ResponseCode.UserNotFound);
+
+			UserAchievementsGrpcResponse achievements = await _userRewardService.GetUserAchievementsAsync(new GetUserAchievementsGrpcRequest { UserId = userId });
+
+			UserAchievement[] userAchievements = achievements?.Items ?? Array.Empty<UserAchievement>();
+
+			return DataResponse<AchievementsResponse>.Ok(new AchievementsResponse
+			{
+				UserAchievements = userAchievements,
+				UnreceivedAchievements = Enum.GetValues<UserAchievement>().Except(userAchievements).ToArray()
 			});
 		}
 
