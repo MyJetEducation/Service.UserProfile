@@ -9,11 +9,8 @@ using NSwag.Annotations;
 using Service.Core.Client.Constants;
 using Service.EducationProgress.Grpc;
 using Service.EducationProgress.Grpc.Models;
-using Service.Grpc;
 using Service.TimeLogger.Grpc;
 using Service.TimeLogger.Grpc.Models;
-using Service.UserInfo.Crud.Grpc;
-using Service.UserInfo.Crud.Grpc.Models;
 using Service.UserProfileApi.Mappers;
 using Service.UserProfileApi.Models;
 using Service.UserProgress.Grpc;
@@ -31,18 +28,15 @@ namespace Service.UserProfileApi.Controllers
 	[Route("/api/v1/userprofile")]
 	public class UserProfileController : ControllerBase
 	{
-		private readonly IGrpcServiceProxy<IUserInfoService> _userInfoService;
 		private readonly IEducationProgressService _educationProgressService;
 		private readonly IUserProgressService _userProgressService;
 		private readonly ITimeLoggerService _timeLoggerService;
 		private readonly IUserRewardService _userRewardService;
 
-		public UserProfileController(IGrpcServiceProxy<IUserInfoService> userInfoService,
-			IEducationProgressService progressService,
+		public UserProfileController(IEducationProgressService progressService,
 			IUserProgressService userProgressService, ITimeLoggerService timeLoggerService,
 			IUserRewardService userRewardService)
 		{
-			_userInfoService = userInfoService;
 			_educationProgressService = progressService;
 			_userProgressService = userProgressService;
 			_timeLoggerService = timeLoggerService;
@@ -53,7 +47,7 @@ namespace Service.UserProfileApi.Controllers
 		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<ProgressResponse>), Description = "Ok")]
 		public async ValueTask<IActionResult> GetProgressAsync()
 		{
-			Guid? userId = await GetUserIdAsync();
+			Guid? userId = GetUserId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
@@ -79,7 +73,7 @@ namespace Service.UserProfileApi.Controllers
 		[SwaggerResponse(HttpStatusCode.OK, typeof(DataResponse<AchievementsResponse>), Description = "Ok")]
 		public async ValueTask<IActionResult> GetAchievementsAsync()
 		{
-			Guid? userId = await GetUserIdAsync();
+			Guid? userId = GetUserId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
@@ -94,14 +88,6 @@ namespace Service.UserProfileApi.Controllers
 			});
 		}
 
-		protected async ValueTask<Guid?> GetUserIdAsync()
-		{
-			UserInfoResponse userInfoResponse = await _userInfoService.Service.GetUserInfoByLoginAsync(new UserInfoAuthRequest
-			{
-				UserName = User.Identity?.Name
-			});
-
-			return userInfoResponse?.UserInfo?.UserId;
-		}
+		private Guid? GetUserId() => Guid.TryParse(User.Identity?.Name, out Guid uid) ? (Guid?)uid : null;
 	}
 }

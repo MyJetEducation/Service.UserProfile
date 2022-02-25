@@ -23,9 +23,6 @@ namespace Service.UserProfileApi.Settings
 		[YamlProperty("UserProfileApi.UserProgressServiceUrl")]
 		public string UserProgressServiceUrl { get; set; }
 
-		[YamlProperty("UserProfileApi.UserInfoCrudServiceUrl")]
-		public string UserInfoCrudServiceUrl { get; set; }
-
 		[YamlProperty("UserProfileApi.EducationProgressServiceUrl")]
 		public string EducationProgressServiceUrl { get; set; }
 
