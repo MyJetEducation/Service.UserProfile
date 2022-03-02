@@ -17,6 +17,7 @@ using Service.UserProgress.Grpc;
 using Service.UserProgress.Grpc.Models;
 using Service.UserReward.Grpc;
 using Service.UserReward.Grpc.Models;
+using Service.Web;
 
 namespace Service.UserProfileApi.Controllers
 {

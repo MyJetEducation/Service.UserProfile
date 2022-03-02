@@ -5,58 +5,59 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MyJetWallet.Sdk.GrpcSchema;
 using MyJetWallet.Sdk.Service;
 using Prometheus;
+using Service.Core.Client.Constants;
 using Service.UserProfileApi.Modules;
+using Service.Web;
 using SimpleTrading.ServiceStatusReporterConnector;
 
 namespace Service.UserProfileApi
 {
-    public class Startup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.BindCodeFirstGrpc();
-            services.AddHostedService<ApplicationLifetimeManager>();
-            services.AddMyTelemetry("ED-", Program.Settings.ZipkinUrl);
-            services.SetupSwaggerDocumentation();
-            services.ConfigurateHeaders();
-            services.AddControllers();
+	public class Startup
+	{
+		private const string DocumentName = "userprofile";
+		private const string ApiName = "UserProfileApi";
 
-            services
-                .AddAuthentication(StartupUtils.ConfigureAuthenticationOptions)
-                .AddJwtBearer(StartupUtils.ConfigureJwtBearerOptions);
-        }
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.BindCodeFirstGrpc();
+			services.AddHostedService<ApplicationLifetimeManager>();
+			services.AddMyTelemetry(Configuration.TelemetryPrefix, Program.Settings.ZipkinUrl);
+			services.SetupSwaggerDocumentation(DocumentName, ApiName);
+			services.ConfigurateHeaders();
+			services.AddControllers();
+			services.ConfigureAuthentication();
+		}
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		{
+			if (env.IsDevelopment())
+				app.UseDeveloperExceptionPage();
 
-            app.UseForwardedHeaders();
-            app.UseRouting();
-            app.UseStaticFiles();
-            app.UseMetricServer();
-            app.BindServicesTree(Assembly.GetExecutingAssembly());
-            app.BindIsAlive();
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
-            app.UseAuthentication();
-            app.UseAuthorization();
-            app.SetupSwagger();
+			app.UseForwardedHeaders();
+			app.UseRouting();
+			app.UseStaticFiles();
+			app.UseMetricServer();
+			app.BindServicesTree(Assembly.GetExecutingAssembly());
+			app.BindIsAlive();
+			app.UseOpenApi();
+			app.UseSwaggerUi3();
+			app.UseAuthentication();
+			app.UseAuthorization();
+			app.SetupSwagger(DocumentName, ApiName);
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapGet("/", async context => await context.Response.WriteAsync("MyJetEducation API endpoint"));
-            });
-        }
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllers();
+				endpoints.MapGet("/", async context => await context.Response.WriteAsync("API endpoint"));
+			});
+		}
 
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            builder.RegisterModule<SettingsModule>();
-            builder.RegisterModule<ServiceModule>();
-        }
-    }
+		public void ConfigureContainer(ContainerBuilder builder)
+		{
+			builder.RegisterModule<SettingsModule>();
+			builder.RegisterModule<ServiceModule>();
+		}
+	}
 }

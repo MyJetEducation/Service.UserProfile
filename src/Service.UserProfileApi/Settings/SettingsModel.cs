@@ -14,9 +14,6 @@ namespace Service.UserProfileApi.Settings
 		[YamlProperty("UserProfileApi.ElkLogs")]
 		public LogElkSettings ElkLogs { get; set; }
 
-		[YamlProperty("UserProfileApi.JwtAudience")]
-		public string JwtAudience { get; set; }
-
 		[YamlProperty("UserProfileApi.TimeLoggerServiceUrl")]
 		public string TimeLoggerServiceUrl { get; set; }
 
