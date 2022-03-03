@@ -10,7 +10,7 @@
     <PackageReference Include="Autofac" Version="6.3.0" />
     <PackageReference Include="MyJetEducation.Service.TimeLogger.Client" Version="1.0.4" />
     <PackageReference Include="SimpleTrading.Common" Version="1.0.32" />
-    <PackageReference Include="MyJetEducation.Service.Core.Client" Version="1.0.31" />
+    <PackageReference Include="MyJetEducation.Service.Core.Client" Version="1.0.32" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.43.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageReference Include="prometheus-net.AspNetCore" Version="5.0.2" />
