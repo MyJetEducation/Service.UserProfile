@@ -59,7 +59,7 @@ namespace Service.UserProfileApi.Controllers
 
 			return DataResponse<ProgressResponse>.Ok(new ProgressResponse
 			{
-				TaskScore = (progress?.Value).GetValueOrDefault(),
+				TaskScore = (progress?.TaskScore).GetValueOrDefault(),
 				TasksPassed = (progress?.TasksPassed).GetValueOrDefault(),
 				TutorialsPassed = (progress?.TutorialsPassed).GetValueOrDefault(),
 				Days = (userTime?.Days).GetValueOrDefault(),
