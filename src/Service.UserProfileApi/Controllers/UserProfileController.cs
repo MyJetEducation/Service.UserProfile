@@ -54,15 +54,21 @@ namespace Service.UserProfileApi.Controllers
 
 			EducationProgressGrpcResponse progress = await _educationProgressService.GetProgressAsync(new GetEducationProgressGrpcRequest {UserId = userId});
 			UnitedProgressGrpcResponse statsProgress = await _userProgressService.GetUnitedProgressAsync(new GetProgressGrpcRequset {UserId = userId});
-			ServiceTimeResponse userTime = await _timeLoggerService.GetUserTime(new GetServiceTimeRequest {UserId = userId});
 			UserAchievementsGrpcResponse achievements = await _userRewardService.GetUserAchievementsAsync(new GetUserAchievementsGrpcRequest {UserId = userId});
+
+			ServiceTimeResponse userTime = await _timeLoggerService.GetUserTime(new GetServiceTimeRequest { UserId = userId });
+			TimeSpan? timeInterval = userTime?.Interval.GetValueOrDefault();
+
+			int totalHours = (int)Math.Round(timeInterval?.TotalHours ?? 0);
+			int totalMinutes = timeInterval?.Minutes ?? 0;
 
 			return DataResponse<ProgressResponse>.Ok(new ProgressResponse
 			{
 				TaskScore = (progress?.TaskScore).GetValueOrDefault(),
 				TasksPassed = (progress?.TasksPassed).GetValueOrDefault(),
 				TutorialsPassed = (progress?.TutorialsPassed).GetValueOrDefault(),
-				Days = (userTime?.Days).GetValueOrDefault(),
+				SpentHours = totalHours,
+				SpentMinutes = totalMinutes,
 				Habit = statsProgress.Habit.ToModel(),
 				Skill = statsProgress.Skill.ToModel(),
 				Knowledge = statsProgress.Knowledge.ToModel(),

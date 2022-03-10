@@ -14,7 +14,9 @@ namespace Service.UserProfileApi.Models
 		[Range(1, 270)]
 		public int TasksPassed { get; set; }
 
-		public int Days { get; set; }
+		public int SpentHours { get; set; }
+
+		public int SpentMinutes { get; set; }
 
 		public StatusProgressModel Habit { get; set; }
 
