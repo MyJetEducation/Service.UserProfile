@@ -76,6 +76,32 @@ namespace Service.UserProfileApi.Controllers
 			});
 		}
 
+
+		[HttpPost("status")]
+		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<UserStatusResponse>), Description = "Ok")]
+		public async ValueTask<IActionResult> GetStatusAsync()
+		{
+			Guid? userId = GetUserId();
+			if (userId == null)
+				return StatusResponse.Error(ResponseCode.UserNotFound);
+
+			UserLastStatusGrpcResponse userLastStatus = await _userRewardService.GetUserLastStatusAsync(new GetUserLastStatusGrpcRequest {UserId = userId});
+
+			StatusGrpcModel status = userLastStatus?.Status;
+
+			if (status == null)
+				return StatusResponse.Error(ResponseCode.NoResponseData);
+
+			return DataResponse<UserStatusResponse>.Ok(new UserStatusResponse
+			{
+				Status = new UserStatusModel
+				{
+					Status = status.Status,
+					Level = status.Level
+				}
+			});
+		}
+
 		[HttpPost("achievements")]
 		[SwaggerResponse(HttpStatusCode.OK, typeof(DataResponse<AchievementsResponse>), Description = "Ok")]
 		public async ValueTask<IActionResult> GetAchievementsAsync()
