@@ -94,11 +94,8 @@ namespace Service.UserProfileApi.Controllers
 
 			return DataResponse<UserStatusResponse>.Ok(new UserStatusResponse
 			{
-				Status = new UserStatusModel
-				{
-					Status = status.Status,
-					Level = status.Level
-				}
+				Status = status.Status,
+				Level = status.Level
 			});
 		}
 
