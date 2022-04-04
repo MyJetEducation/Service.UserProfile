@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Service.Core.Client.Constants;
 
-namespace Service.UserProfileApi.Models
+namespace Service.WalletApi.UserProfileApi.Controllers.Contracts
 {
 	public class AchievementsResponse
 	{

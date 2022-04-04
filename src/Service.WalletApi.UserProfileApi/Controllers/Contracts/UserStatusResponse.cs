@@ -1,6 +1,6 @@
 ﻿using Service.Core.Client.Constants;
 
-namespace Service.UserProfileApi.Models
+namespace Service.WalletApi.UserProfileApi.Controllers.Contracts
 {
 	public class UserStatusResponse
 	{

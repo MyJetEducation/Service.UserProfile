@@ -5,21 +5,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyJetWallet.Sdk.Authorization.Http;
 using NSwag.Annotations;
 using Service.Core.Client.Constants;
+using Service.Core.Client.Extensions;
 using Service.EducationProgress.Grpc;
 using Service.EducationProgress.Grpc.Models;
 using Service.TimeLogger.Grpc;
 using Service.TimeLogger.Grpc.Models;
-using Service.UserProfileApi.Mappers;
-using Service.UserProfileApi.Models;
 using Service.UserProgress.Grpc;
 using Service.UserProgress.Grpc.Models;
 using Service.UserReward.Grpc;
 using Service.UserReward.Grpc.Models;
+using Service.WalletApi.UserProfileApi.Controllers.Contracts;
+using Service.WalletApi.UserProfileApi.Mappers;
 using Service.Web;
 
-namespace Service.UserProfileApi.Controllers
+namespace Service.WalletApi.UserProfileApi.Controllers
 {
 	[Authorize]
 	[ApiController]
@@ -118,6 +120,13 @@ namespace Service.UserProfileApi.Controllers
 			});
 		}
 
-		private Guid? GetUserId() => Guid.TryParse(User.Identity?.Name, out Guid uid) ? (Guid?)uid : null;
+		private Guid? GetUserId()
+		{
+			string clientId = this.GetClientId();
+			if (clientId.IsNullOrWhiteSpace())
+				return null;
+
+			return Guid.TryParse(clientId, out Guid uid) ? (Guid?)uid : null;
+		}
 	}
 }
