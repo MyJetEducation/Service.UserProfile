@@ -5,40 +5,40 @@ namespace Service.WalletApi.UserProfileApi.Settings
 {
 	public class SettingsModel
 	{
-		[YamlProperty("UserProfileApi.SeqServiceUrl")]
+		[YamlProperty("WalletApiEducation.SeqServiceUrl")]
 		public string SeqServiceUrl { get; set; }
 
-		[YamlProperty("UserProfileApi.ZipkinUrl")]
+		[YamlProperty("WalletApiEducation.ZipkinUrl")]
 		public string ZipkinUrl { get; set; }
 
-		[YamlProperty("UserProfileApi.ElkLogs")]
+		[YamlProperty("WalletApiEducation.ElkLogs")]
 		public LogElkSettings ElkLogs { get; set; }
 
-		[YamlProperty("UserProfileApi.EnableApiTrace")]
+		[YamlProperty("WalletApiEducation.EnableApiTrace")]
 		public bool EnableApiTrace { get; set; }
 
-		[YamlProperty("UserProfileApi.MyNoSqlReaderHostPort")]
+		[YamlProperty("WalletApiEducation.MyNoSqlReaderHostPort")]
 		public string MyNoSqlReaderHostPort { get; set; }
 
-		[YamlProperty("UserProfileApi.AuthMyNoSqlReaderHostPort")]
+		[YamlProperty("WalletApiEducation.AuthMyNoSqlReaderHostPort")]
 		public string AuthMyNoSqlReaderHostPort { get; set; }
 
-		[YamlProperty("UserProfileApi.SessionEncryptionKeyId")]
+		[YamlProperty("WalletApiEducation.SessionEncryptionKeyId")]
 		public string SessionEncryptionKeyId { get; set; }
 
-		[YamlProperty("UserProfileApi.MyNoSqlWriterUrl")]
+		[YamlProperty("WalletApiEducation.MyNoSqlWriterUrl")]
 		public string MyNoSqlWriterUrl { get; set; }
 
-		[YamlProperty("UserProfileApi.TimeLoggerServiceUrl")]
+		[YamlProperty("WalletApiEducation.TimeLoggerServiceUrl")]
 		public string TimeLoggerServiceUrl { get; set; }
 
-		[YamlProperty("UserProfileApi.UserProgressServiceUrl")]
+		[YamlProperty("WalletApiEducation.UserProgressServiceUrl")]
 		public string UserProgressServiceUrl { get; set; }
 
-		[YamlProperty("UserProfileApi.EducationProgressServiceUrl")]
+		[YamlProperty("WalletApiEducation.EducationProgressServiceUrl")]
 		public string EducationProgressServiceUrl { get; set; }
 
-		[YamlProperty("UserProfileApi.UserRewardServiceUrl")]
+		[YamlProperty("WalletApiEducation.UserRewardServiceUrl")]
 		public string UserRewardServiceUrl { get; set; }
 	}
 }

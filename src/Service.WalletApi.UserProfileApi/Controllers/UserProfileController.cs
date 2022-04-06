@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using MyJetWallet.Sdk.Authorization.Http;
 using NSwag.Annotations;
 using Service.Core.Client.Constants;
-using Service.Core.Client.Extensions;
 using Service.EducationProgress.Grpc;
 using Service.EducationProgress.Grpc.Models;
 using Service.TimeLogger.Grpc;
@@ -50,7 +49,7 @@ namespace Service.WalletApi.UserProfileApi.Controllers
 		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<ProgressResponse>), Description = "Ok")]
 		public async ValueTask<IActionResult> GetProgressAsync()
 		{
-			Guid? userId = GetUserId();
+			string userId = this.GetClientId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
@@ -83,7 +82,7 @@ namespace Service.WalletApi.UserProfileApi.Controllers
 		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<UserStatusResponse>), Description = "Ok")]
 		public async ValueTask<IActionResult> GetStatusAsync()
 		{
-			Guid? userId = GetUserId();
+			string userId = this.GetClientId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
@@ -105,7 +104,7 @@ namespace Service.WalletApi.UserProfileApi.Controllers
 		[SwaggerResponse(HttpStatusCode.OK, typeof(DataResponse<AchievementsResponse>), Description = "Ok")]
 		public async ValueTask<IActionResult> GetAchievementsAsync()
 		{
-			Guid? userId = GetUserId();
+			string userId = this.GetClientId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
@@ -118,15 +117,6 @@ namespace Service.WalletApi.UserProfileApi.Controllers
 				UserAchievements = userAchievements,
 				UnreceivedAchievements = Enum.GetValues<UserAchievement>().Except(userAchievements).ToArray()
 			});
-		}
-
-		private Guid? GetUserId()
-		{
-			string clientId = this.GetClientId();
-			if (clientId.IsNullOrWhiteSpace())
-				return null;
-
-			return Guid.TryParse(clientId, out Guid uid) ? (Guid?)uid : null;
 		}
 	}
 }
