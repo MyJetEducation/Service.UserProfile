@@ -1,7 +1,7 @@
-﻿using Service.UserProfileApi.Models;
-using Service.UserProgress.Grpc.Models;
+﻿using Service.UserProgress.Grpc.Models;
+using Service.WalletApi.UserProfileApi.Controllers.Contracts;
 
-namespace Service.UserProfileApi.Mappers
+namespace Service.WalletApi.UserProfileApi.Mappers
 {
 	public static class StatusProgressMapper
 	{

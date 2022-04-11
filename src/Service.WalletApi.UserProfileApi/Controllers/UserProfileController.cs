@@ -5,21 +5,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyJetWallet.Sdk.Authorization.Http;
 using NSwag.Annotations;
 using Service.Core.Client.Constants;
 using Service.EducationProgress.Grpc;
 using Service.EducationProgress.Grpc.Models;
 using Service.TimeLogger.Grpc;
 using Service.TimeLogger.Grpc.Models;
-using Service.UserProfileApi.Mappers;
-using Service.UserProfileApi.Models;
 using Service.UserProgress.Grpc;
 using Service.UserProgress.Grpc.Models;
 using Service.UserReward.Grpc;
 using Service.UserReward.Grpc.Models;
+using Service.WalletApi.UserProfileApi.Controllers.Contracts;
+using Service.WalletApi.UserProfileApi.Mappers;
 using Service.Web;
 
-namespace Service.UserProfileApi.Controllers
+namespace Service.WalletApi.UserProfileApi.Controllers
 {
 	[Authorize]
 	[ApiController]
@@ -48,7 +49,7 @@ namespace Service.UserProfileApi.Controllers
 		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<ProgressResponse>), Description = "Ok")]
 		public async ValueTask<IActionResult> GetProgressAsync()
 		{
-			Guid? userId = GetUserId();
+			string userId = this.GetClientId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
@@ -81,7 +82,7 @@ namespace Service.UserProfileApi.Controllers
 		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<UserStatusResponse>), Description = "Ok")]
 		public async ValueTask<IActionResult> GetStatusAsync()
 		{
-			Guid? userId = GetUserId();
+			string userId = this.GetClientId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
@@ -103,7 +104,7 @@ namespace Service.UserProfileApi.Controllers
 		[SwaggerResponse(HttpStatusCode.OK, typeof(DataResponse<AchievementsResponse>), Description = "Ok")]
 		public async ValueTask<IActionResult> GetAchievementsAsync()
 		{
-			Guid? userId = GetUserId();
+			string userId = this.GetClientId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
@@ -117,7 +118,5 @@ namespace Service.UserProfileApi.Controllers
 				UnreceivedAchievements = Enum.GetValues<UserAchievement>().Except(userAchievements).ToArray()
 			});
 		}
-
-		private Guid? GetUserId() => Guid.TryParse(User.Identity?.Name, out Guid uid) ? (Guid?)uid : null;
 	}
 }
