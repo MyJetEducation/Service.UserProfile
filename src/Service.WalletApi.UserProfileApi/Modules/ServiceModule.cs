@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using MyJetWallet.ApiSecurityManager.Autofac;
 using MyJetWallet.Sdk.RestApiTrace;
-using MyJetWallet.Sdk.Service;
 using Service.EducationProgress.Client;
 using Service.TimeLogger.Client;
 using Service.UserProgress.Client;
@@ -13,8 +12,7 @@ namespace Service.WalletApi.UserProfileApi.Modules
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			// second parameter is null because we do not store api keys yet for wallet api
-			builder.RegisterEncryptionServiceClient(ApplicationEnvironment.AppName, () => Program.Settings.MyNoSqlWriterUrl);
+			builder.RegisterEncryptionServiceClient();
 
 			builder.RegisterEducationProgressClient(Program.Settings.EducationProgressServiceUrl);
 			builder.RegisterUserProgressClient(Program.Settings.UserProgressServiceUrl);
