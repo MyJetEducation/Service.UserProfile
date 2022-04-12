@@ -12,7 +12,7 @@ namespace Service.WalletApi.UserProfileApi.Modules
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterEncryptionServiceClient();
+			builder.RegisterEncryptionServiceClient("wallet-api", () => Program.Settings.MyNoSqlWriterUrl);
 
 			builder.RegisterEducationProgressClient(Program.Settings.EducationProgressServiceUrl);
 			builder.RegisterUserProgressClient(Program.Settings.UserProgressServiceUrl);
